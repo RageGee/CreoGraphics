@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creographics - Web-based Graphics Design Tool</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <div class="logo">
+                <h1>Creographics</h1>
+            </div>
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="#" id="file-menu-btn">File</a></li>
+                    <li><a href="#" id="edit-menu-btn">Edit</a></li>
+                    <li><a href="#" id="view-menu-btn">View</a></li>
+                    <li><a href="#" id="object-menu-btn">Object</a></li>
+                    <li><a href="#" id="help-menu-btn">Help</a></li>
+                </ul>
+            </nav>
+            <div class="user-controls">
+                <button id="save-btn" class="btn"><i class="fas fa-save"></i> Save</button>
+                <button id="export-btn" class="btn"><i class="fas fa-file-export"></i> Export</button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Left Toolbar -->
+            <aside class="left-toolbar">
+                <div class="tool-group">
+                    <div class="tool-title">Basic</div>
+                    <div class="tool-item" data-tool="select" data-tooltip="Select (V)">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <div class="tool-item" data-tool="move" data-tooltip="Move (M)">
+                        <i class="fas fa-arrows-alt"></i>
+                    </div>
+                    <div class="tool-item" data-tool="crop" data-tooltip="Crop (C)">
+                        <i class="fas fa-crop-alt"></i>
+                    </div>
+                </div>
+
+                <div class="tool-group">
+                    <div class="tool-title">Shapes</div>
+                    <div class="tool-item" data-tool="rectangle" data-tooltip="Rectangle (R)">
+                        <i class="far fa-square"></i>
+                    </div>
+                    <div class="tool-item" data-tool="circle" data-tooltip="Circle (O)">
+                        <i class="far fa-circle"></i>
+                    </div>
+                    <div class="tool-item" data-tool="polygon" data-tooltip="Polygon (P)">
+                        <i class="fas fa-draw-polygon"></i>
+                    </div>
+                    <div class="tool-item" data-tool="star" data-tooltip="Star (*)">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="tool-item" data-tool="shape" data-tooltip="Custom Shapes (S)">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+
+                <div class="tool-group">
+                    <div class="tool-title">Drawing</div>
+                    <div class="tool-item" data-tool="pen" data-tooltip="Pen (P)">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <div class="tool-item" data-tool="brush" data-tooltip="Brush (B)">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="tool-item" data-tool="line" data-tooltip="Line (L)">
+                        <i class="fas fa-slash"></i>
+                    </div>
+                    <div class="tool-item" data-tool="curve" data-tooltip="Curve (Q)">
+                        <i class="fas fa-bezier-curve"></i>
+                    </div>
+                    <div class="tool-item" data-tool="arrow" data-tooltip="Arrow (A)">
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </div>
+                </div>
+
+                <div class="tool-group">
+                    <div class="tool-title">Fill & Text</div>
+                    <div class="tool-item" data-tool="gradient" data-tooltip="Gradient (G)">
+                        <i class="fas fa-gradient"></i>
+                    </div>
+                    <div class="tool-item" data-tool="text" data-tooltip="Text (T)">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <div class="tool-item" data-tool="eyedropper" data-tooltip="Color Picker (I)">
+                        <i class="fas fa-eye-dropper"></i>
+                    </div>
+                    <div class="tool-item" data-tool="eraser" data-tooltip="Eraser (E)">
+                        <i class="fas fa-eraser"></i>
+                    </div>
+                </div>
+
+                <div class="tool-group">
+                    <div class="tool-title">Media</div>
+                    <div class="tool-item" data-tool="image" data-tooltip="Insert Image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Canvas Area -->
+            <section class="canvas-container">
+                <div class="canvas-controls">
+                    <div class="zoom-controls">
+                        <button id="zoom-out-btn"><i class="fas fa-search-minus"></i></button>
+                        <span id="zoom-level">100%</span>
+                        <button id="zoom-in-btn"><i class="fas fa-search-plus"></i></button>
+                    </div>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="main-canvas"></canvas>
+                </div>
+            </section>
+
+            <!-- Right Properties Panel -->
+            <aside class="properties-panel">
+                <div class="panel-section">
+                    <h3>Properties</h3>
+                    <div class="property-group" id="object-properties">
+                        <div class="property">
+                            <label>Width:</label>
+                            <input type="number" id="object-width" value="100">
+                        </div>
+                        <div class="property">
+                            <label>Height:</label>
+                            <input type="number" id="object-height" value="100">
+                        </div>
+                        <div class="property">
+                            <label>X:</label>
+                            <input type="number" id="object-x" value="0">
+                        </div>
+                        <div class="property">
+                            <label>Y:</label>
+                            <input type="number" id="object-y" value="0">
+                        </div>
+                        <div class="property">
+                            <label>Rotation:</label>
+                            <input type="number" id="object-rotation" value="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>Fill & Stroke</h3>
+                    <div class="property-group">
+                        <div class="property">
+                            <label>Fill Color:</label>
+                            <input type="color" id="fill-color" value="#ffffff">
+                        </div>
+                        <div class="property">
+                            <label>Stroke Color:</label>
+                            <input type="color" id="stroke-color" value="#000000">
+                        </div>
+                        <div class="property">
+                            <label>Stroke Width:</label>
+                            <input type="number" id="stroke-width" value="1" min="0" max="100">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>Text Properties</h3>
+                    <div class="property-group" id="text-properties">
+                        <div class="property">
+                            <label>Font:</label>
+                            <select id="font-family">
+                                <option value="Arial">Arial</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                        </div>
+                        <div class="property">
+                            <label>Size:</label>
+                            <input type="number" id="font-size" value="16" min="1" max="200">
+                        </div>
+                        <div class="property font-style-controls">
+                            <button id="bold-btn" class="style-btn"><i class="fas fa-bold"></i></button>
+                            <button id="italic-btn" class="style-btn"><i class="fas fa-italic"></i></button>
+                            <button id="underline-btn" class="style-btn"><i class="fas fa-underline"></i></button>
+                        </div>
+                        <div class="property text-align-controls">
+                            <button id="align-left-btn" class="style-btn"><i class="fas fa-align-left"></i></button>
+                            <button id="align-center-btn" class="style-btn"><i class="fas fa-align-center"></i></button>
+                            <button id="align-right-btn" class="style-btn"><i class="fas fa-align-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Bottom Status Bar -->
+        <footer class="status-bar">
+            <div class="cursor-position">
+                <span>X: <span id="cursor-x">0</span></span>
+                <span>Y: <span id="cursor-y">0</span></span>
+            </div>
+            <div class="canvas-info">
+                <span>Canvas: 800 × 600</span>
+            </div>
+            <div class="selected-tool">
+                <span>Selected: <span id="current-tool">Select</span></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="file-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>File Options</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <button id="new-file-btn" class="modal-btn"><i class="fas fa-file"></i> New</button>
+                <button id="open-file-btn" class="modal-btn"><i class="fas fa-folder-open"></i> Open</button>
+                <button id="save-file-btn" class="modal-btn"><i class="fas fa-save"></i> Save</button>
+                <button id="save-as-btn" class="modal-btn"><i class="fas fa-file-export"></i> Save As</button>
+                <button id="export-png-btn" class="modal-btn"><i class="fas fa-file-image"></i> Export as PNG</button>
+                <button id="export-jpg-btn" class="modal-btn"><i class="fas fa-file-image"></i> Export as JPG</button>
+                <button id="export-svg-btn" class="modal-btn"><i class="fas fa-file-code"></i> Export as SVG</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layers Panel (Hidden by default, toggleable) -->
+    <div class="layers-panel" id="layers-panel">
+        <div class="panel-header">
+            <h3>Layers</h3>
+            <button id="close-layers-btn" class="close-panel-btn">&times;</button>
+        </div>
+        <div class="panel-body">
+            <div class="layers-controls">
+                <button id="add-layer-btn"><i class="fas fa-plus"></i></button>
+                <button id="delete-layer-btn"><i class="fas fa-trash"></i></button>
+                <button id="move-layer-up-btn"><i class="fas fa-arrow-up"></i></button>
+                <button id="move-layer-down-btn"><i class="fas fa-arrow-down"></i></button>
+            </div>
+            <ul class="layers-list" id="layers-list">
+                <li class="layer-item active" data-layer-id="1">
+                    <div class="layer-visibility"><i class="fas fa-eye"></i></div>
+                    <div class="layer-name">Layer 1</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>
